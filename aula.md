@@ -7,6 +7,7 @@
         - const: não pode mudar o valor
     - Operadores (atribuição, concatenação, matemáticos, lógicos)
         - atribuição de valor -> =
+        - concatenação
     - Tipos de dados (string, number, boolean)
         - String: texto
         - Number: números
