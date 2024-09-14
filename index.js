@@ -1,13 +1,5 @@
-// arrays, objetos
-let meta = {
-    value: 'ler um livro por mês',
-    checked: true,
+function start () {
+    console.log('comecou')
 }
 
-let metas = [
-    meta, 
-    {
-        value: 'fazer outra coisa',
-        checked: false,
-    }
-]
+start ()
