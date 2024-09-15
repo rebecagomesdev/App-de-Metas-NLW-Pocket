@@ -1,5 +1,7 @@
 const { select, input, checkbox } = require('@inquirer/prompts')
 
+let mensagem = "Bem vindo ao app de Metas"
+
 let meta = {
     value: 'Tomar 3L de água/dia',
     checked: false,
@@ -11,7 +13,7 @@ const cadastrarMeta = async () => {
     const meta = await input({message: "Digite a meta:"})
 
     if(meta.length == 0) {
-        console.log('A meta não pode ser vazia')
+        mensagem = 'A meta não pode ser vazia'
         return
     }
 
@@ -20,6 +22,8 @@ const cadastrarMeta = async () => {
         value: meta, checked: false
         }
     )
+
+    mensagem = "Meta cadastrada com sucesso!"
 }
 
 const listarMetas = async () => {
@@ -55,7 +59,7 @@ const metasRealizadas = async () => {
     })
 
     if(realizadas.length == 0) {
-        console.log('Não existem metas realizadas.')
+        mensagem = 'Não existem metas realizadas.'
         return
     }
 
@@ -72,7 +76,7 @@ const metasAbertas = async () => {
     })
 
     if(abertas.length == 0) {
-        console.log('Não existem metas abertas! :)')
+        mensagem = 'Não existem metas abertas! :)'
         return
     }
 
@@ -95,7 +99,7 @@ const deletarMetas = async () => {
     })
 
     if(itensADeletar.length == 0) {
-        console.log("Nenhum item para deletar")
+        mensagem = "Nenhum item para deletar"
         return
     }
 
@@ -105,13 +109,25 @@ const deletarMetas = async () => {
         })
     })
 
-    console.log("Meta(s) deletada(s) com sucesso!")
+    mensagem = "Meta(s) deletada(s) com sucesso!"
+}
+
+const mostrarMensagem = () => {
+    console.clear()
+
+    if(mensagem != "") {
+        console.log(mensagem)
+        console.log("")
+        mensagem = ""
+    }
 }
 
 const start = async () => {
 
     while(true){
         
+        mostrarMensagem()
+
         const opcao = await select({
             message: "Menu >",
             choices: [
@@ -145,18 +161,19 @@ const start = async () => {
         switch(opcao) {
             case "cadastrar":
                 await cadastrarMeta()
-                console.log(metas)
                 break
             case "listar":
                 await listarMetas()
-                console.log("vamos listar")
                 break
             case "realizadas":
                 await metasRealizadas()
+                break
             case "abertas":
                 await metasAbertas()
+                break
             case "deletar":
                 await deletarMetas()
+                break
             case"sair":
                 console.log("Até mais!")
                 return
